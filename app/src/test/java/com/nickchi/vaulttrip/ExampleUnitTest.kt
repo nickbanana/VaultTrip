@@ -1,4 +1,4 @@
-package com.example.vaulttrip
+package com.nickchi.vaulttrip
 
 import org.junit.Test
 

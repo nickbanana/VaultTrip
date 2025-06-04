@@ -1,4 +1,4 @@
-package com.example.vaulttrip.ui.theme
+package com.nickchi.vaulttrip.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
