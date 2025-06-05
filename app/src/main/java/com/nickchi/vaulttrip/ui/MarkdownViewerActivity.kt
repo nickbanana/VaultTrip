@@ -1,4 +1,4 @@
-package com.nickchi.vaulttrip
+package com.nickchi.vaulttrip.ui
 
 import android.net.Uri
 import android.os.Bundle

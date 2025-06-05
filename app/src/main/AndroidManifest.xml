@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.nickchi.vaulttrip"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.nickchi.vaulttrip">
 
     <application
         android:allowBackup="true"
@@ -13,7 +14,10 @@
         android:theme="@style/Theme.VaultTrip"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.VaultTrip">
             <intent-filter>
@@ -23,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MarkdownViewerActivity"
+            android:name=".ui.MarkdownViewerActivity"
             android:exported="true"
             android:label="VaultTrip"
             android:theme="@style/Theme.VaultTrip">
