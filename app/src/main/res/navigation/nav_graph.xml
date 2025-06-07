@@ -18,7 +18,9 @@
     <fragment
         android:id="@+id/viewerFragment"
         android:name="com.nickchi.vaulttrip.ui.MarkdownViewerFragment"
-        android:label="@string/view_markdown" />
+        android:label="@string/view_markdown">
+        <argument android:name="markdownFileUri" app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.nickchi.vaulttrip.ui.SettingsFragment"

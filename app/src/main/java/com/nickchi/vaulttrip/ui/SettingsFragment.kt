@@ -45,6 +45,11 @@ class SettingsFragment : Fragment() {
         chooseButton.setOnClickListener {
             folderPicker.launch(null)
         }
+        clearButton = view.findViewById(R.id.clearVaultButton)
+        clearButton.setOnClickListener {
+            VaultPrefs.clearRootUri(requireContext())
+            Toast.makeText(requireContext(), "已清除 Vault 資料夾", Toast.LENGTH_SHORT).show()
+        }
         return view
     }
 }

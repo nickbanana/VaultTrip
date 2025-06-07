@@ -20,4 +20,5 @@
     <string name="view_markdown">View Markdown</string>
     <string name="vault_browser">Vault Browser</string>
     <string name="select_vault_folder_label">選擇 Vault 資料夾</string>
+    <string name="clear_vault_folder_label">清除Vault資料夾設定</string>
 </resources>

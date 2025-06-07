@@ -14,9 +14,6 @@
         android:theme="@style/Theme.VaultTrip"
         tools:targetApi="31">
         <activity
-            android:name=".ui.SettingsActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.VaultTrip">
@@ -24,22 +21,6 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.MarkdownViewerActivity"
-            android:exported="true"
-            android:label="VaultTrip"
-            android:theme="@style/Theme.VaultTrip">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="text/markdown" />
-                <data android:mimeType="text/plain" /> <!-- If it can also view plain text as markdown -->
-                <data android:scheme="content" />
-                <data android:scheme="file" />
             </intent-filter>
         </activity>
     </application>

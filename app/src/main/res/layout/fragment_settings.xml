@@ -11,4 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/select_vault_folder_label" />
+
+    <Button
+        android:id="@+id/clearVaultButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/clear_vault_folder_label" />
 </LinearLayout>
