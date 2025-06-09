@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.nickchi.vaulttrip.R
 import com.nickchi.vaulttrip.data.DocumentItem
 import com.nickchi.vaulttrip.data.VaultPrefs
+import com.nickchi.vaulttrip.file.VaultScanner.getAllMarkdownFilesFromUri
 
 class MainFragment : Fragment() {
     private lateinit var container: LinearLayout
@@ -38,6 +39,7 @@ class MainFragment : Fragment() {
         container = view.findViewById(R.id.container)
         loadOrRequestInitialDirectory()
         initializeBackPressedBehavior()
+        exampleUsageOfRecursiveFetch()
     }
 
     private fun initializeBackPressedBehavior() {
@@ -199,4 +201,29 @@ class MainFragment : Fragment() {
             }
         }
     }
+
+    // 遞迴取出檔案
+    private fun exampleUsageOfRecursiveFetch() {
+        VaultPrefs.getRootUri(requireContext())?.let { userSelectedRootUri ->
+            // This can be a long-running operation!
+            // Consider running it in a background thread or coroutine.
+            Thread { // Simple Thread example, use coroutines for better management
+                val ignoreUri = VaultPrefs.getTemplateUri(requireContext())
+                Log.d("RecursiveFetchExample", "Starting recursive fetch from $userSelectedRootUri, ignoreUri: $ignoreUri")
+                val allMdFiles = getAllMarkdownFilesFromUri(requireContext(), userSelectedRootUri, ignoreUri)
+                activity?.runOnUiThread { // Update UI or log on the main thread
+                    if (allMdFiles.isNotEmpty()) {
+                        Log.i("RecursiveFetchExample", "Found ${allMdFiles.size} markdown files globally:")
+                        // allMdFiles.forEach { Log.i("RecursiveFetchExample", "- $it") }
+                        // Do something with the list, e.g., update a database, build an index
+                        Toast.makeText(requireContext(), "Found ${allMdFiles.size} MD files in total.", Toast.LENGTH_LONG).show()
+                    } else {
+                        Log.i("RecursiveFetchExample", "No markdown files found recursively or error occurred.")
+                        Toast.makeText(requireContext(), "No MD files found in total scan.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }.start()
+        }
+    }
+
 }

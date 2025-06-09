@@ -21,4 +21,6 @@
     <string name="vault_browser">Vault Browser</string>
     <string name="select_vault_folder_label">選擇 Vault 資料夾</string>
     <string name="clear_vault_folder_label">清除Vault資料夾設定</string>
+    <string name="choose_template_label">選擇模板資料夾</string>
+    <string name="clear_template_folder_label">清除模板資料夾設定</string>
 </resources>

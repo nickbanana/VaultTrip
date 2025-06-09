@@ -6,15 +6,51 @@
     android:orientation="vertical"
     android:padding="32dp">
 
-    <Button
-        android:id="@+id/chooseVaultButton"
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/select_vault_folder_label" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/clearVaultButton"
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/chooseVaultButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/select_vault_folder_label" />
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/clearVaultButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/clear_vault_folder_label" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/clear_vault_folder_label" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/chooseTemplateButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/choose_template_label" />
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/clearTemplateButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/clear_template_folder_label" />
+    </LinearLayout>
+
 </LinearLayout>

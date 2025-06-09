@@ -17,6 +17,8 @@ class SettingsFragment : Fragment() {
 
     private lateinit var chooseButton: Button
     private lateinit var clearButton: Button
+    private lateinit var chooseTemplateButton: Button
+    private lateinit var clearTemplateButton: Button
 
     private val folderPicker = registerForActivityResult(
         ActivityResultContracts.OpenDocumentTree()
@@ -35,12 +37,35 @@ class SettingsFragment : Fragment() {
         }
     }
 
+    private val templatePicker = registerForActivityResult(
+        ActivityResultContracts.OpenDocumentTree()
+    ) { uri: Uri? ->
+        handleSelectedTemplate(uri)
+    }
+
+    private fun handleSelectedTemplate(uri: Uri?) {
+        if (uri != null) {
+            val flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+            requireContext().contentResolver.takePersistableUriPermission(uri, flags)
+            VaultPrefs.saveTemplateUri(requireContext(), uri)
+            Toast.makeText(requireContext(), "已儲存 Template 資料夾", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireContext(), "未選擇任何資料夾", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
+        setupVaultSettingButtons(view)
+        setupTemplateButtons(view)
+        return view
+    }
+
+    private fun setupVaultSettingButtons(view: View) {
         chooseButton = view.findViewById(R.id.chooseVaultButton)
         chooseButton.setOnClickListener {
             folderPicker.launch(null)
@@ -50,6 +75,17 @@ class SettingsFragment : Fragment() {
             VaultPrefs.clearRootUri(requireContext())
             Toast.makeText(requireContext(), "已清除 Vault 資料夾", Toast.LENGTH_SHORT).show()
         }
-        return view
+    }
+
+    private fun setupTemplateButtons(view: View) {
+        chooseTemplateButton = view.findViewById(R.id.chooseTemplateButton)
+        chooseTemplateButton.setOnClickListener {
+            templatePicker.launch(null)
+        }
+        clearTemplateButton = view.findViewById(R.id.clearTemplateButton)
+        clearTemplateButton.setOnClickListener {
+            VaultPrefs.clearTemplateUri(requireContext())
+            Toast.makeText(requireContext(), "已清除 Template 資料夾", Toast.LENGTH_SHORT).show()
+        }
     }
 }
