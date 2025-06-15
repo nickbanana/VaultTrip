@@ -76,7 +76,7 @@ class MainFragment : Fragment() {
                 parentDocIdStack.add(rootDocId)
                 listFolderContents(uri, rootDocId)
             } else {
-                Log.e("MainActivity", "Could not get root document ID from $uri")
+                Log.e("MainFragment", "Could not get root document ID from $uri")
                 Toast.makeText(requireContext(), "Could not access folder root", Toast.LENGTH_SHORT).show()
             }
         }

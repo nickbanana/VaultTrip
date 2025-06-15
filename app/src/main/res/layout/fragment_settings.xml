@@ -7,22 +7,23 @@
     android:padding="32dp">
 
     <LinearLayout
+        android:id="@+id/containerVaultFolder"
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/buttonChooseVaultFolder"
             style="?android:attr/buttonBarButtonStyle"
-            android:id="@+id/chooseVaultButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/select_vault_folder_label" />
 
         <Button
+            android:id="@+id/buttonClearVaultFolder"
             style="?android:attr/buttonBarButtonStyle"
-            android:id="@+id/clearVaultButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -31,26 +32,155 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/containerTemplateFolder"
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/buttonChooseTemplateFolder"
             style="?android:attr/buttonBarButtonStyle"
-            android:id="@+id/chooseTemplateButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/choose_template_label" />
 
         <Button
+            android:id="@+id/buttonClearTemplateFolder"
             style="?android:attr/buttonBarButtonStyle"
-            android:id="@+id/clearTemplateButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/clear_template_folder_label" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/containerLocationTemplate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textLocationTemplateTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/location_template_uri_title_label"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textLocationTemplateUri"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/template_uri_empty" />
+
+        <LinearLayout
+            android:id="@+id/containerLocationTemplateButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonChooseLocationTemplate"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/choose_location_template_label" />
+
+            <Button
+                android:id="@+id/buttonClearLocationTemplate"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/clear_location_template_label" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/containerLocationItemTemplate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textLocationItemTemplateTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/location_item_template_uri_title_label" />
+
+        <TextView
+            android:id="@+id/textLocationItemTemplateUri"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/template_uri_empty" />
+
+        <LinearLayout
+            android:id="@+id/containerLocationItemTemplateButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonChooseLocationItemTemplate"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/choose_location_item_template_label" />
+
+            <Button
+                android:id="@+id/buttonClearLocationItemTemplate"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/clear_location_item_template_label" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/containerItineraryTemplate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textItineraryTemplateTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/itinerary_template_uri_title_label" />
+
+        <TextView
+            android:id="@+id/textItineraryTemplateUri"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/template_uri_empty" />
+
+        <LinearLayout
+            android:id="@+id/containerItineraryTemplateButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonChooseItineraryTemplate"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/choose_itinerary_template_label" />
+
+            <Button
+                android:id="@+id/buttonClearItineraryTemplate"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/clear_itinerary_template_label" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
