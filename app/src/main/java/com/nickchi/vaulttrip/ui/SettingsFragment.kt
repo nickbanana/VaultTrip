@@ -206,34 +206,19 @@ class SettingsFragment : Fragment() {
     // --- UI Update Methods ---
     private fun updateLocationTemplateDisplay() {
         val uri = VaultPrefs.getLocationTemplateUri(requireContext())
-        val displayName = if (uri != null) {
-            getDisplayNameForUri(uri)
-                ?: uri.toString() // Fallback to raw URI if display name is null
-        } else {
-            getString(R.string.template_uri_empty)
-        }
+        val displayName = getUriDisplayName(uri)
         binding.textLocationTemplateUri.text = displayName
     }
 
     private fun updateLocationItemTemplateDisplay() {
         val uri = VaultPrefs.getLocationItemTemplateUri(requireContext())
-        val displayName = if (uri != null) {
-            getDisplayNameForUri(uri)
-                ?: uri.toString() // Fallback to raw URI if display name is null
-        } else {
-            getString(R.string.template_uri_empty)
-        }
+        val displayName = getUriDisplayName(uri)
         binding.textLocationItemTemplateUri.text = displayName
     }
 
     private fun updateItineraryTemplateDisplay() {
         val uri = VaultPrefs.getItineraryTemplateUri(requireContext())
-        val displayName = if (uri != null) {
-            getDisplayNameForUri(uri)
-                ?: uri.toString() // Fallback to raw URI if display name is null
-        } else {
-            getString(R.string.template_uri_empty)
-        }
+        val displayName = getUriDisplayName(uri)
         binding.textItineraryTemplateUri.text = displayName
     }
 
@@ -242,8 +227,10 @@ class SettingsFragment : Fragment() {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun getDisplayNameForUri(uri: Uri): String? {
-        var displayName: String? = null
+    private fun getUriDisplayName(uri: Uri?): String {
+        if (uri == null) {
+            return getString(R.string.template_uri_empty)
+        }
         // The query can fail if the URI is invalid, so use try-catch.
         try {
             val cursor: Cursor? = requireContext().contentResolver.query(
@@ -259,7 +246,7 @@ class SettingsFragment : Fragment() {
                 if (it.moveToFirst()) {
                     val displayNameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
                     if (displayNameIndex != -1) {
-                        displayName = it.getString(displayNameIndex)
+                        return it.getString(displayNameIndex)
                     }
                 }
             }
@@ -268,8 +255,8 @@ class SettingsFragment : Fragment() {
             // For example, you might fall back to uri.getLastPathSegment() or uri.toString()
             Log.e("SettingsFragment", "Error getting display name for URI: $uri", e)
             // Fallback: try to get the last path segment as a rough display name
-            displayName = uri.lastPathSegment
+            return uri.lastPathSegment ?: uri.toString()
         }
-        return displayName
+        return uri.toString()
     }
 }

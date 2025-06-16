@@ -43,7 +43,8 @@ class MarkdownViewerFragment : Fragment() {
             return
         }
         try {
-            val markdownUri = markdownUriString.toUri() // Potential for IllegalArgumentException if string is not a valid URI
+            val markdownUri =
+                markdownUriString.toUri() // Potential for IllegalArgumentException if string is not a valid URI
             // textView.text = "Loading Markdown from URI: $markdownUri" // Temporary, good for debugging
             loadMarkdownFromUri(markdownUri)
         } catch (e: IllegalArgumentException) {
@@ -59,11 +60,14 @@ class MarkdownViewerFragment : Fragment() {
             // requireContext() is appropriate here as Fragment should be attached
             val content = requireContext().contentResolver.openInputStream(uri)
                 ?.bufferedReader().use { it?.readText() }
-            if (content != null ) {
+            if (content != null) {
                 val markwon = Markwon.create(requireContext())
                 markwon.setMarkdown(textView, content) // Uses member textView
             } else {
-                Log.e("MarkdownViewer", "Failed to load markdown from URI: $uri (stream was null or empty)")
+                Log.e(
+                    "MarkdownViewer",
+                    "Failed to load markdown from URI: $uri (stream was null or empty)"
+                )
                 showError("Error: Could not read file content.")
             }
 

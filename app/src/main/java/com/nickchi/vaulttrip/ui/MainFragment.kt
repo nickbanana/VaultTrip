@@ -43,17 +43,19 @@ class MainFragment : Fragment() {
     }
 
     private fun initializeBackPressedBehavior() {
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (canNavigateUpInFilesystem()) {
-                    navigateUpInFilesystem()
-                } else {
-                    // Disable this callback to prevent infinite loop, and manually call onBackPressed()
-                    isEnabled = false
-                    requireActivity().onBackPressedDispatcher.onBackPressed()
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (canNavigateUpInFilesystem()) {
+                        navigateUpInFilesystem()
+                    } else {
+                        // Disable this callback to prevent infinite loop, and manually call onBackPressed()
+                        isEnabled = false
+                        requireActivity().onBackPressedDispatcher.onBackPressed()
+                    }
                 }
-            }
-        })
+            })
     }
 
     private fun loadOrRequestInitialDirectory() {
@@ -77,7 +79,8 @@ class MainFragment : Fragment() {
                 listFolderContents(uri, rootDocId)
             } else {
                 Log.e("MainFragment", "Could not get root document ID from $uri")
-                Toast.makeText(requireContext(), "Could not access folder root", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Could not access folder root", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
@@ -91,13 +94,20 @@ class MainFragment : Fragment() {
         } catch (e: SecurityException) {
             Log.e("PermissionError", "Failed to take persistable URI permission for $uri", e)
             // Inform the user
-            Toast.makeText(requireContext(), "Failed to persist permission for $uri", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                requireContext(),
+                "Failed to persist permission for $uri",
+                Toast.LENGTH_LONG
+            ).show()
             false
         }
     }
 
     private fun listFolderContents(treeUriForNavigation: Uri, parentDocumentId: String) {
-        Log.d("ListContents", "Listing for tree: $treeUriForNavigation, parentDocId: $parentDocumentId")
+        Log.d(
+            "ListContents",
+            "Listing for tree: $treeUriForNavigation, parentDocId: $parentDocumentId"
+        )
         val documentItems = fetchDocumentItems(treeUriForNavigation, parentDocumentId)
         val sortedDocumentItems = sortDocumentItems(documentItems)
         displayFolderContents(sortedDocumentItems, treeUriForNavigation)
@@ -120,12 +130,17 @@ class MainFragment : Fragment() {
     }
 
     private fun sortDocumentItems(items: List<DocumentItem>): List<DocumentItem> {
-        return items.sortedWith(compareBy({ it.mimeType == DocumentsContract.Document.MIME_TYPE_DIR }, { it.name }))
+        return items.sortedWith(
+            compareBy(
+                { it.mimeType == DocumentsContract.Document.MIME_TYPE_DIR },
+                { it.name })
+        )
     }
 
     private fun createDocumentItemView(item: DocumentItem, treeUriForNavigation: Uri): TextView {
         return TextView(requireContext()).apply {
-            text = if (item.mimeType == DocumentsContract.Document.MIME_TYPE_DIR) "📁 ${item.name}" else item.name
+            text =
+                if (item.mimeType == DocumentsContract.Document.MIME_TYPE_DIR) "📁 ${item.name}" else item.name
             textSize = 18f
             setPadding(0, 16, 0, 16)
             setOnClickListener {
@@ -154,7 +169,11 @@ class MainFragment : Fragment() {
                 findNavController().navigate(action)
             } catch (e: IllegalArgumentException) {
                 Log.e("NavigationError", "Failed to navigate to file: ${item.name}", e)
-                Toast.makeText(requireContext(), "Failed to navigate to file: ${item.name}", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Failed to navigate to file: ${item.name}",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }
@@ -197,7 +216,11 @@ class MainFragment : Fragment() {
             } else {
                 Log.e("NavigationError", "Failed to navigate up in filesystem")
                 loadOrRequestInitialDirectory()
-                Toast.makeText(requireContext(), "Failed to navigate up in filesystem", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Failed to navigate up in filesystem",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }
@@ -209,17 +232,35 @@ class MainFragment : Fragment() {
             // Consider running it in a background thread or coroutine.
             Thread { // Simple Thread example, use coroutines for better management
                 val ignoreUri = VaultPrefs.getTemplateUri(requireContext())
-                Log.d("RecursiveFetchExample", "Starting recursive fetch from $userSelectedRootUri, ignoreUri: $ignoreUri")
-                val allMdFiles = getAllMarkdownFilesFromUri(requireContext(), userSelectedRootUri, ignoreUri)
+                Log.d(
+                    "RecursiveFetchExample",
+                    "Starting recursive fetch from $userSelectedRootUri, ignoreUri: $ignoreUri"
+                )
+                val allMdFiles =
+                    getAllMarkdownFilesFromUri(requireContext(), userSelectedRootUri, ignoreUri)
                 activity?.runOnUiThread { // Update UI or log on the main thread
                     if (allMdFiles.isNotEmpty()) {
-                        Log.i("RecursiveFetchExample", "Found ${allMdFiles.size} markdown files globally:")
+                        Log.i(
+                            "RecursiveFetchExample",
+                            "Found ${allMdFiles.size} markdown files globally:"
+                        )
                         // allMdFiles.forEach { Log.i("RecursiveFetchExample", "- $it") }
                         // Do something with the list, e.g., update a database, build an index
-                        Toast.makeText(requireContext(), "Found ${allMdFiles.size} MD files in total.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Found ${allMdFiles.size} MD files in total.",
+                            Toast.LENGTH_LONG
+                        ).show()
                     } else {
-                        Log.i("RecursiveFetchExample", "No markdown files found recursively or error occurred.")
-                        Toast.makeText(requireContext(), "No MD files found in total scan.", Toast.LENGTH_SHORT).show()
+                        Log.i(
+                            "RecursiveFetchExample",
+                            "No markdown files found recursively or error occurred."
+                        )
+                        Toast.makeText(
+                            requireContext(),
+                            "No MD files found in total scan.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }.start()
